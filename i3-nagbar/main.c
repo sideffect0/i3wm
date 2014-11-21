@@ -330,7 +330,7 @@ int main(int argc, char *argv[]) {
         {"type", required_argument, 0, 't'},
         {0, 0, 0, 0}};
 
-    char *options_string = "b:f:m:t:vh";
+    char *options_string = "b:f:s:m:t:vh";
 
     prompt = i3string_from_utf8("Please do not run this program.");
 
@@ -366,6 +366,8 @@ int main(int argc, char *argv[]) {
                 if (optind < argc)
                     optind++;
                 break;
+	   case 's':
+		break;
         }
     }
 
