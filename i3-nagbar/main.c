@@ -131,8 +131,10 @@ static void handle_button_release(xcb_connection_t *conn, xcb_button_release_eve
     printf("button released on x = %d, y = %d\n",
            event->event_x, event->event_y);
     /* If the user hits the close button, we exit(0) */
-    if (event->event_x >= (rect.width - 32))
+    if (event->event_x >= (rect.width - 32)){
+	//to do
         exit(0);
+    }
     button_t *button = get_button_at(event->event_x, event->event_y);
     if (!button)
         return;
@@ -280,6 +282,18 @@ static int handle_expose(xcb_connection_t *conn, xcb_expose_event_t *event) {
     return 1;
 }
 
+
+int create_lock_file(){
+ 
+ FILE *fd;
+ if(access("/tmp/uuid_i3nagbar.lock", F_OK ) != -1 ) {
+    printf("already exists");
+ } else {
+    //fopen("/tmp/uuid_i3nagbar.lock","wb+");
+    printf("not exists");
+ }
+
+}
 int main(int argc, char *argv[]) {
     /* The following lines are a terribly horrible kludge. Because terminal
      * emulators have different ways of interpreting the -e command line
@@ -305,7 +319,7 @@ int main(int argc, char *argv[]) {
      * hope. */
     char *cmd = NULL;
     const size_t argv0_len = strlen(argv[0]);
-    int flag = FALSE;
+    int s_flag = 0;
     if (argv0_len > strlen(".nagbar_cmd") &&
         strcmp(argv[0] + argv0_len - strlen(".nagbar_cmd"), ".nagbar_cmd") == 0) {
         unlink(argv[0]);
@@ -368,7 +382,10 @@ int main(int argc, char *argv[]) {
                     optind++;
                 break;
 	   case 's':
-		
+		if(s_flag == 0){
+		  create_lock_file();
+		  s_flag = 1;
+		}
 		break;
         }
     }
