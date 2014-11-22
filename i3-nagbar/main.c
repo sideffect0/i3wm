@@ -132,7 +132,8 @@ static void handle_button_release(xcb_connection_t *conn, xcb_button_release_eve
            event->event_x, event->event_y);
     /* If the user hits the close button, we exit(0) */
     if (event->event_x >= (rect.width - 32)){
-	//to do
+	//delete lock
+	unlink("/tmp/uuid_i3nagbar.lock");
         exit(0);
     }
     button_t *button = get_button_at(event->event_x, event->event_y);
