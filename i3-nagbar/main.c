@@ -305,6 +305,7 @@ int main(int argc, char *argv[]) {
      * hope. */
     char *cmd = NULL;
     const size_t argv0_len = strlen(argv[0]);
+    int flag = FALSE;
     if (argv0_len > strlen(".nagbar_cmd") &&
         strcmp(argv[0] + argv0_len - strlen(".nagbar_cmd"), ".nagbar_cmd") == 0) {
         unlink(argv[0]);
@@ -330,7 +331,7 @@ int main(int argc, char *argv[]) {
         {"type", required_argument, 0, 't'},
         {0, 0, 0, 0}};
 
-    char *options_string = "b:f:s:m:t:vh";
+    char *options_string = "s:b:f:m:t:vh";
 
     prompt = i3string_from_utf8("Please do not run this program.");
 
@@ -367,6 +368,7 @@ int main(int argc, char *argv[]) {
                     optind++;
                 break;
 	   case 's':
+		
 		break;
         }
     }
