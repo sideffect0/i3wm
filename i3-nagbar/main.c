@@ -282,7 +282,8 @@ static int handle_expose(xcb_connection_t *conn, xcb_expose_event_t *event) {
     return 1;
 }
 
-
+#define NAGBAR_EXIST 0
+#define NAGBAR_NOT_EXIST 1
 int create_lock_file(){
  
  FILE *fd;
