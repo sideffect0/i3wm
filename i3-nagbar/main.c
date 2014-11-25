@@ -290,9 +290,11 @@ int create_lock_file(){
  FILE *fd;
  if(access("/tmp/uuid_i3nagbar.lock", F_OK ) != -1 ) {
     printf("already exists");
+    exit(0);
  } else {
     //fopen("/tmp/uuid_i3nagbar.lock","wb+");
     printf("not exists");
+    return NAGBAR_NOT_EXIST;
  }
 
 }
